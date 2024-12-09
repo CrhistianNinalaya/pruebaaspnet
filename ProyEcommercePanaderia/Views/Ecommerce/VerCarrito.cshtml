@@ -1,0 +1,86 @@
+﻿@model IEnumerable<ProyEcommercePanaderia.Models.Carrito>
+
+@{
+    ViewData["Title"] = "VerCarrito";
+}
+
+<h1>VerCarrito</h1>
+
+@if (TempData["mensaje"] != null)
+{
+    <div class="alert alert-warning">
+        <h4><strong>@TempData["mensaje"]</strong></h4>
+    </div>
+}
+
+<p>
+    <a asp-action="IndexProductos" class="btn btn-info">
+        Seguir Comprando
+    </a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Imagen</th>
+            <th>
+                @Html.DisplayNameFor(model => model.Codigo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NombreProducto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Precio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cantidad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Importe)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                <img src="@Url.Content("/Productos/" + item.Codigo +".jpg")"
+                     alt="@item.NombreProducto"
+                     style="width:80px;height:80px;" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Codigo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NombreProducto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Precio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cantidad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Importe)
+            </td>
+            <td>
+                @Html.ActionLink("Modificar", 
+                     "AgregarAlCarrito", 
+                     new { id = item.Codigo },
+                     new { @class = "btn btn-success"}) |
+                @Html.ActionLink("Eliminar", 
+                     "EliminarProducto",
+                     new { id = item.Codigo }, 
+                     new { @class = "btn btn-danger" })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+@if (ViewBag.total != null)
+{
+    <div class="alert alert-info">
+        <h4>Total a Pagar: <strong>@ViewBag.total</strong></h4>
+    </div>
+}

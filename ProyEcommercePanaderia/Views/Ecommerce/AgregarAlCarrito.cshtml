@@ -1,0 +1,62 @@
+﻿@model ProyEcommercePanaderia.Models.Productos
+
+@{
+    ViewData["Title"] = "AgregarAlCarrito";
+}
+
+<h1>AgregarAlCarrito</h1>
+
+<div>
+    <h4>Productos</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.cod_prod)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.cod_prod)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.nom_prod)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.nom_prod)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.pre_prod)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.pre_prod)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.stk_prod)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.stk_prod)
+        </dd>
+    </dl>
+    <div>
+        <img src="@Url.Content("/Productos/" + Model.cod_prod +".jpg")"
+             alt="@Model.nom_prod"
+             style="width:180px;height:180px;" />
+    </div>
+    <form asp-action="AgregarAlCarrito">
+        <div>
+            Ingrese Cantidad a Comprar: @Html.TextBox("cantidad", 1)
+            <input type="submit" value="Agregar Producto"
+                   class="btn btn-primary" /> |
+            <a asp-action="IndexProductos"
+               class="btn btn-warning">Seguir Comprando</a> |
+            <a asp-action="VerCarrito"
+               class="btn btn-success">Ver Carrito</a>
+        </div>
+    </form>
+</div>
+
+<br/>
+@if (ViewBag.mensaje != null)
+{
+    <div class="alert alert-info">
+        <h4><strong>@ViewBag.mensaje</strong></h4>
+    </div>
+}

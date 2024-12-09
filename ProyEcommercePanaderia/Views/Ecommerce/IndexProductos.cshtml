@@ -1,0 +1,59 @@
+﻿@model IEnumerable<ProyEcommercePanaderia.Models.Productos>
+
+@{
+    ViewData["Title"] = "IndexProductos";
+}
+
+<h1>IndexProductos</h1>
+
+<p>
+    <a asp-action="VerCarrito"
+       class="btn btn-success">Ver Carrito</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Imagen</th>
+            <th>
+                @Html.DisplayNameFor(model => model.cod_prod)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.nom_prod)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.pre_prod)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.stk_prod)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                <img src="@Url.Content("/Productos/" + item.cod_prod +".jpg")"
+                     alt="@item.nom_prod"
+                     style="width:80px;height:80px;" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cod_prod)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nom_prod)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.pre_prod)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.stk_prod)
+            </td>
+            <td>
+                @Html.ActionLink("Agregar", "AgregarAlCarrito", 
+                    new { id = item.cod_prod })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
